@@ -27,6 +27,10 @@ def register(request):
 
 
 def profile(request):
+    
+    if request.method == "POST":
+        pass
+    
     context = {
         'title': 'Profile',
         # 'form': form

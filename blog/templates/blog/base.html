@@ -24,7 +24,7 @@
 
 <body>
     <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: black;">
         <div class="container">
           <a class="navbar-brand mr-4" href="{% url "blog-home" %}">InMinds</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,6 +41,7 @@
             <div class="navbar-nav">
               {% if user.is_authenticated %}
                 <a class="nav-item nav-link" href="{% url "profile" %}">Profile</a>
+                
                 <form action="{% url 'logout' %}" method="post">
                   {% csrf_token %}
                   <button class="border-0 bg-trans" type="submit">Log Out</button>

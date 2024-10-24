@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 # Login
 from django.contrib.auth.views import LoginView, LogoutView
@@ -34,3 +36,9 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='user/login.html', next_page='blog-home'), name='login'),
     path('logout/', LogoutView.as_view(template_name='user/logout.html', next_page='login'), name='logout'),
 ]
+
+
+
+# Instructing Django from where to serve
+if settings.DEBUG:  # Only in development mode
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

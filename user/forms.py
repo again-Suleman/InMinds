@@ -20,3 +20,5 @@ class UserRegister(UserCreationForm):
             user.save() # Calling it later so that I can log it out first
         return user
 
+
+
