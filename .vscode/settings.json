@@ -1,0 +1,27 @@
+{
+    "editor.formatOnSave": true,
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.indexing": true,
+    "python.analysis.packageIndexDepths": [
+        {
+            "name": "django",
+            "depth": 10,
+            "includeAllSymbols": true,
+        }
+    ],
+    "black-formatter.args": [
+        "--skip-string-normalization"
+    ],
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.formatting.provider": "none",
+    "python.testing.pytestArgs": [
+        "src",
+        "-c",
+        "src/pytest.ini"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}

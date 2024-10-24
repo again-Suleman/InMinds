@@ -1,0 +1,66 @@
+{% extends "blog/base.html" %}
+
+{% load widget_tweaks %}
+{% block main %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <!-- Login Card for modern look -->
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <h2 class="text-center my-4">Login</h2>
+                    
+                    {% if form.non_field_errors %}
+                    <div class="alert-danger">
+                        {{form.non_field_errors}}
+                    </div>
+                    {% endif %}
+
+
+                    <form method="POST" novalidate>
+                        {% csrf_token %}
+                        
+                        <!-- Username Field -->
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            {{ form.username|add_class:"form-control form-control-lg rounded-pill" }}
+                            <!-- Custom Error Display for Username -->
+                            {% if form.username.errors %}
+                                <div class="text-danger small">
+                                    {% for error in form.username.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            {{ form.password|add_class:"form-control form-control-lg rounded-pill" }}
+                            <!-- Custom Error Display for Password -->
+                            {% if form.password.errors %}
+                                <div class="text-danger small">
+                                    {% for error in form.password.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-black w-100 btn-lg rounded-pill">Login</button>
+                    </form>
+
+                    <!-- Sign Up Link -->
+                    <div class="text-center border-top pt-3 mt-4">
+                        <small class="text-muted">
+                            Need an account? <a class="text-decoration-none" href="{% url "register" %}">Sign Up Now</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
