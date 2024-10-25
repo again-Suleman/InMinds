@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 
-from user.forms import UserRegister
+from user.forms import ProfileUpdate, UpdateUserForm, UserRegister
 
 
 def register(request):
@@ -27,14 +27,31 @@ def register(request):
 
 
 def profile(request):
-    
     if request.method == "POST":
-        pass
+        
+        #! Populate the forms by passing the instance
+        u_form = UpdateUserForm(request.POST, instance=request.user)
+        p_form = ProfileUpdate(request.POST, request.FILES, instance=request.user.profile)
+        
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Form updated Successfully!')
+        
+        else:
+            messages.error(request, f'An Error Occured')
+    
+    else:
+        u_form = UpdateUserForm(instance=request.user)
+        p_form = ProfileUpdate(instance=request.user.profile)
     
     context = {
         'title': 'Profile',
-        # 'form': form
+        'u_form': u_form,
+        'p_form': p_form,
     }
+    
+    
     return render(request, 'user/profile.html', context)
 
 
