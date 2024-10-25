@@ -23,6 +23,7 @@ class UserRegister(UserCreationForm):
 
 
 
+
 class UpdateUserForm(forms.ModelForm):
     class Meta():
         model = User
