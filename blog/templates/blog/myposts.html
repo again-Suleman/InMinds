@@ -1,10 +1,6 @@
 {% extends "blog/base.html" %}
 
 {% block main %}
-<button class="btn btn-black w-100 btn-lg rounded-pill">
-  <a class="text-decoration-none" href="{% url "myposts" %}">View your Posts </a>
-
-</button>
     {% for post in posts %}
     <article class="media content-section">
         <div class="media-body">

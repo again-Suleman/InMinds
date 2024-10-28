@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 
@@ -25,7 +26,7 @@ def register(request):
     return render(request, 'user/register.html', context)
 
 
-
+@login_required(login_url='login')
 def profile(request):
     if request.method == "POST":
         
