@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User 
+from django.contrib.auth.models import User
+from django.urls import reverse 
 
 
 # Create your models here.
@@ -15,5 +16,9 @@ class Post(models.Model):
     # Dundererererer
     def __str__(self):
         return f'{self.author} post, Title: {self.title}'
+    
+    def get_absolute_url(self):
+        return reverse("post-detail", kwargs={"pk": self.pk})
+    
 
 

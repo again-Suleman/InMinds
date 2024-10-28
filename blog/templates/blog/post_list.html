@@ -1,10 +1,7 @@
 {% extends "blog/base.html" %}
 
 {% block main %}
-<button class="btn btn-black w-100 btn-lg rounded-pill">
-  <a class="text-decoration-none" href="{% url "myposts" %}">View your Posts </a>
-
-</button>
+    <button><a href="{% url "post-create" %}">Post Something</a></button>
     {% for post in posts %}
     <article class="media content-section">
         <div class="media-body">
@@ -12,12 +9,10 @@
             <a class="mr-2" href="#">{{ post.author }}</a>
             <small class="text-muted">{{ post.date_posted }}</small>
           </div>
-          <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+          <h2><a class="article-title" href="{% url "post-detail" post.id %}">{{ post.title }}</a></h2>
           <p class="article-content">{{ post.content }}</p>
         </div>
       </article>
 
       {% endfor %}
-    
-
 {% endblock main %}

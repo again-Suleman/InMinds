@@ -39,6 +39,6 @@ urlpatterns = [
 
 
 
-# Instructing Django from where to serve
-if settings.DEBUG:  # Only in development mode
+# Instructing Django from where to serve (For Dev mode only)
+if settings.DEBUG:  
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
