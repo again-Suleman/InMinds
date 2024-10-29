@@ -1,7 +1,16 @@
 {% extends "blog/base.html" %}
 
 {% block main %}
-    <button><a href="{% url "post-create" %}">Post Something</a></button>
+<div class="text-right my-4">
+  <a href="{% url 'post-create' %}" class="btn btn-success rounded-pill shadow-sm px-3 py-1" style="font-size: 1rem;">
+    My Post
+</a>
+  <a href="{% url 'post-create' %}" class="btn btn-success rounded-pill shadow-sm px-3 py-1" style="font-size: 1rem;">
+      Post +
+  </a>
+  
+</div>
+
     {% for post in posts %}
     <article class="media content-section">
         <div class="media-body">

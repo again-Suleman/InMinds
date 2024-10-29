@@ -37,11 +37,14 @@
                 </div>
                 <div class="navbar-nav">
                     {% if user.is_authenticated %}
-                        <a class="nav-item nav-link text-white" href="{% url "profile" %}">Profile</a>
-                        <form action="{% url 'logout' %}" method="post" class="d-inline">
-                            {% csrf_token %}
-                            <button class="border-0 bg-trans text-white" type="submit">Log Out</button>
-                        </form>
+                    <a class="nav-item nav-link text-white" href="{% url 'profile' %}">Profile</a>
+                    <form action="{% url 'logout' %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="nav-item nav-link text-white border-0 bg-transparent" style="cursor: pointer;">
+                            Log Out
+                        </button>
+                    </form>
+                    
                     {% else %}
                         <a class="nav-item nav-link text-white" href="{% url "login" %}">Login</a>
                         <a class="nav-item nav-link text-white" href="{% url "register" %}">Register</a>
