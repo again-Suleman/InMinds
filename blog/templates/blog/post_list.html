@@ -1,18 +1,21 @@
 {% extends "blog/base.html" %}
 
 {% block main %}
-<div class="text-right my-4">
-  <a href="{% url 'post-create' %}" class="btn btn-success rounded-pill shadow-sm px-3 py-1" style="font-size: 1rem;">
-    My Post
-</a>
-  <a href="{% url 'post-create' %}" class="btn btn-success rounded-pill shadow-sm px-3 py-1" style="font-size: 1rem;">
-      Post +
-  </a>
-  
-</div>
+    <div class="text-right my-4">
+      <a href="{% url 'my-posts' %}" class="btn btn-outline-info rounded-pill shadow-sm px-3 py-1" style="font-size: 1rem;">
+        My Blogs
+    </a>
+      <a href="{% url 'post-create' %}" class="btn btn-success rounded-pill shadow-sm px-3 py-1" style="font-size: 1rem;">
+          Post +
+      </a>
+      
+    </div>
 
     {% for post in posts %}
     <article class="media content-section">
+      <div class="text-center mr-4">
+        <img src="{{ post.author.profile.image.url }}" alt="Profile - Image" class="rounded-circle img-fluid" style="object-fit: cover; width: 40px; height: 40px;">
+      </div>
         <div class="media-body">
           <div class="article-metadata">
             <a class="mr-2" href="#">{{ post.author }}</a>
@@ -24,4 +27,50 @@
       </article>
 
       {% endfor %}
+
+      {% if is_paginated %}
+    <div class="pagination d-flex justify-content-center mt-4">
+        <ul class="pagination">
+            <!-- First and Previous Buttons -->
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="/?page=1" aria-label="First">First</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="/?page={{ page_obj.previous_page_number }}" aria-label="Previous">&laquo; Previous</a>
+                </li>
+            {% endif %}
+
+            <!-- Page Number Buttons -->
+            {% for page_num in page_obj.paginator.page_range %}
+                {% if page_num == page_obj.number %}
+                    <!-- Current Page (Centered) -->
+                    <li class="page-item active">
+                        <span class="page-link">{{ page_num }}</span>
+                    </li>
+                {% elif page_num == page_obj.number|add:'-1' or page_num == page_obj.number|add:'1' %}
+                    <!-- Pages on either side of the current page -->
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            
+
+            <!-- Next and Last Buttons -->
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="/?page={{ page_obj.next_page_number }}" aria-label="Next">Next &raquo;</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="/?page={{ page_obj.paginator.num_pages }}" aria-label="Last">Last</a>
+                </li>
+            {% endif %}
+
+
+        </ul>
+    </div>
+{% endif %}
+
 {% endblock main %}

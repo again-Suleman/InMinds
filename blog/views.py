@@ -20,6 +20,7 @@ class PostListView(ListView):
     template_name = "blog/post_list.html"
     context_object_name = 'posts'
     ordering = ['-date_posted']
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -38,6 +39,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'content']
     login_url = 'login'
+    pk_url_kwarg = 'pk'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
